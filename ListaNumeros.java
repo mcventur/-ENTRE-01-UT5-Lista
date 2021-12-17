@@ -7,7 +7,7 @@
  * y dos  métodos estáticos para trabajar con
  * arrays de dos dimensiones
  *
- * @author -
+ * @author - Antonio Aguilera
  */
 
 
