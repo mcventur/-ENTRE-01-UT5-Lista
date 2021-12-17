@@ -7,7 +7,7 @@
  * y dos  métodos estáticos para trabajar con
  * arrays de dos dimensiones
  *
- * @author -
+ * @author - Itxaso Hurtado
  */
 
 
@@ -19,8 +19,9 @@ public class ListaNumeros {
     public static final char CAR_CABECERA = '-';
 
     private static final Random generador = new Random();
-    //TODO
     
+    private int[] lista;
+    private int pos;
     
 
     /**
@@ -30,9 +31,9 @@ public class ListaNumeros {
      *
      * @param n el tamaño máximo de la lista
      */
-    public ListaNumeros() {
-        //TODO
-        
+    public ListaNumeros(int num) {
+        lista = new int[num];
+        pos = 0;
     }
 
     /**
@@ -42,8 +43,8 @@ public class ListaNumeros {
      * @param numero el valor que se añade.  
      * @return true si se ha podido añadir, false en otro caso
      */
-    public void addElemento() {
-        //TODO
+    public boolean addElemento(int numero) {
+        
         
         
 
