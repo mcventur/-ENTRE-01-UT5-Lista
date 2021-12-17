@@ -7,7 +7,7 @@
  * y dos  métodos estáticos para trabajar con
  * arrays de dos dimensiones
  *
- * @author -
+ * @author Jonathan Del Arco
  */
 
 
@@ -19,10 +19,9 @@ public class ListaNumeros {
     public static final char CAR_CABECERA = '-';
 
     private static final Random generador = new Random();
-    //TODO
+    private int[] listaNumeros;
+    private int pos;
     
-    
-
     /**
      * Constructor de la clase ListaNumeros
      * Crea e inicializa adecuadamente los
@@ -30,9 +29,9 @@ public class ListaNumeros {
      *
      * @param n el tamaño máximo de la lista
      */
-    public ListaNumeros() {
-        //TODO
-        
+    public ListaNumeros(int n) {
+        listaNumeros = new int[n];
+        pos=0;
     }
 
     /**
@@ -42,44 +41,49 @@ public class ListaNumeros {
      * @param numero el valor que se añade.  
      * @return true si se ha podido añadir, false en otro caso
      */
-    public void addElemento() {
-        //TODO
-        
-        
-
+    public boolean addElemento(int numero) {
+        boolean OK = true;
+        boolean noOK = false;
+        if(pos<listaNumeros.length){
+            listaNumeros[pos]=numero;
+        } else{
+            return noOK;
+        }
+        pos++;
+        return OK;
     }
 
     /**
      * @return true si la lista está completa, false en otro caso
      * Hacer sin if
      */
-    public void estaCompleta() {
-        //TODO
-
+    public boolean estaCompleta() {
+        return pos>=listaNumeros.length;
     }
 
     /**
      * @return true si la lista está vacía, false en otro caso.
      * Hacer sin if
      */
-    public void estaVacia() {
-       //TODO
-
+    public boolean estaVacia() {
+        return pos==0;
     }
 
     /**
      * @return el nº de elementos realmente guardados en la lista
      */
-    public void getTotalNumeros() {
-        //TODO
-
+    public int getTotalNumeros() {
+        return pos;
     }
 
     /**
      * Vacía la lista
      */
     public void vaciarLista() {
-       //TODO
+       for(int i=0; i<pos; i++){
+           listaNumeros[i]=0;
+       }
+       pos=0;
     }
 
     /**
@@ -89,15 +93,19 @@ public class ListaNumeros {
      * Si la lista está vacía devuelve ""
      */
     public String toString() {
-       //TODO
-       
-       
-       
+       if(estaVacia()){
+           
+       }else{
+           Utilidades str=null;
+           for(int i=0; i<pos; i++){
+               //TERMINAR
+               System.out.print(str.centrarNumero(listaNumeros[i], ANCHO_FORMATO));
+               
+           }
+       }
        return "";
     }
-
-     
-
+    
     /**
      * Mostrar en pantalla la lista
      */
