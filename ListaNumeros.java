@@ -140,20 +140,18 @@ public class ListaNumeros {
      * la lista
      */
     public int segundoMaximo() {             
-        int max=listaNumeros[0];
-        int secMax=listaNumeros[0];
-        int noHay=0;
+        int max=0;
+        int segMax=0;
         
-        for (int i = 0; i < listaNumeros.length; i++) {
-            if (listaNumeros[i] > max) {
-                secMax = max;
-                max = listaNumeros[i];
-            } else {
-                noHay = Integer.MIN_VALUE;
+        for(int i=0; i<listaNumeros.length; i++) {
+            if(listaNumeros[i]>max ) {
+                segMax = max;
+                max=listaNumeros[i];
+            }else if(listaNumeros[i]>segMax){
+                segMax=listaNumeros[i];
             }
         }
-        
-        return secMax;
+        return segMax;
     }
 
     /**
@@ -174,7 +172,7 @@ public class ListaNumeros {
      *          false si no se han colocado los segundos máximos porque no había ninguno
      */
     public void segundosMaximosAlPrincipio() {
-        //TODO
+        
         
         
 
