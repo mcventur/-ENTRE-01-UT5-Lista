@@ -113,6 +113,7 @@ public class ListaNumeros {
                System.out.printf("%c" + "%c" + "%c" + "%c" + "%c" + "%c", CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA);
            }
        }
+       
        return "";
     }
     
@@ -138,11 +139,21 @@ public class ListaNumeros {
      * No se puede usar ningún otro array auxiliar ni hay que ordenar previamente
      * la lista
      */
-    public int segundoMaximo() {       
-       for(int i=0; i<listaNumeros.length; i++){
-           
-       }
-       return 0;
+    public int segundoMaximo() {             
+        int max=listaNumeros[0];
+        int secMax=listaNumeros[0];
+        int noHay=0;
+        
+        for (int i = 0; i < listaNumeros.length; i++) {
+            if (listaNumeros[i] > max) {
+                secMax = max;
+                max = listaNumeros[i];
+            } else {
+                noHay = Integer.MIN_VALUE;
+            }
+        }
+        
+        return secMax;
     }
 
     /**
