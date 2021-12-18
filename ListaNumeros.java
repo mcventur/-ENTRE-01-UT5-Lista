@@ -97,10 +97,20 @@ public class ListaNumeros {
            
        }else{
            Utilidades str=null;
+           String numero = "";
+           String resultado = "";
+           
            for(int i=0; i<pos; i++){
-               //TERMINAR
-               System.out.print(str.centrarNumero(listaNumeros[i], ANCHO_FORMATO));
-               
+               System.out.printf("%c" + "%c" + "%c" + "%c" + "%c" + "%c", CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA);
+           }
+           System.out.print("\n");
+           for(int i=0; i<pos; i++){
+               numero = str.centrarNumero(listaNumeros[i], ANCHO_FORMATO);
+               System.out.print(numero);
+           }
+           System.out.print("\n");
+           for(int i=0; i<pos; i++){
+               System.out.printf("%c" + "%c" + "%c" + "%c" + "%c" + "%c", CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA);
            }
        }
        return "";
@@ -128,10 +138,11 @@ public class ListaNumeros {
      * No se puede usar ningún otro array auxiliar ni hay que ordenar previamente
      * la lista
      */
-    public void segundoMaximo() {       
-       //TODO
-
-        
+    public int segundoMaximo() {       
+       for(int i=0; i<listaNumeros.length; i++){
+           
+       }
+       return 0;
     }
 
     /**
