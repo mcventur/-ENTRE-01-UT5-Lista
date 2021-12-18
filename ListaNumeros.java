@@ -82,10 +82,11 @@ public class ListaNumeros {
      * Vacía la lista
      */
     public void vaciarLista() {
-        while(pos>0)  {
+        while(pos>=0)  {
             lista[pos] = 0;
             pos--;
         } 
+        pos = 0;
     }
 
     /**
@@ -95,14 +96,10 @@ public class ListaNumeros {
      * Si la lista está vacía devuelve ""
      */
     public String toString() {
-       
-       
-       
-       
-       return "";
+       String listaS = "";
+       listaS += lista.toString();
+       return listaS;
     }
-
-     
 
     /**
      * Mostrar en pantalla la lista
