@@ -12,6 +12,7 @@
 
 
 import java.util.Random;
+import java.util.Arrays;
 
 public class ListaNumeros {
     public static final int DIMENSION = 10;
@@ -140,18 +141,20 @@ public class ListaNumeros {
      * la lista
      */
     public int segundoMaximo() {             
-        int max=0;
-        int segMax=0;
-        
-        for(int i=0; i<listaNumeros.length; i++) {
-            if(listaNumeros[i]>max ) {
+        int max=listaNumeros[0];
+        int segMax=listaNumeros[0];
+        int seRepite=0;
+        for(int i=0; i<pos; i++) {
+            if(listaNumeros[i] > max) {
                 segMax = max;
                 max=listaNumeros[i];
-            }else if(listaNumeros[i]>segMax){
+            }else if(listaNumeros[i] > segMax){
                 segMax=listaNumeros[i];
+            } else if(pos==1 || max==segMax) {
+                seRepite = Integer.MIN_VALUE;
             }
         }
-        return segMax;
+         return segMax;
     }
 
     /**
