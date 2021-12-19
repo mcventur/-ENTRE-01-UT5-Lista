@@ -145,10 +145,10 @@ public class ListaNumeros {
         int segMax=listaNumeros[0];
         int seRepite=0;
         for(int i=0; i<pos; i++) {
-            if(listaNumeros[i] > max) {
+            if(listaNumeros[i] >= max) {
                 segMax = max;
                 max=listaNumeros[i];
-            }else if(listaNumeros[i] > segMax){
+            }else if(listaNumeros[i] < segMax){
                 segMax=listaNumeros[i];
             } else if(pos==1 || max==segMax) {
                 seRepite = Integer.MIN_VALUE;
@@ -192,7 +192,7 @@ public class ListaNumeros {
      * Usa exclusivamente métodos de la clase Arrays
      */
     public void buscarBinario() {
-         //TODO
+         
          
          
 
