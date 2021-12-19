@@ -68,7 +68,7 @@ public class ListaNumeros {
      * Hacer sin if
      */
     public boolean estaVacia() {
-       return pos<=0;
+       return pos==0;
     }
 
     /**
@@ -97,10 +97,20 @@ public class ListaNumeros {
      */
     public String toString() {
        String listaS = "";
-       listaS += lista.toString();
-       return listaS;
+       for(int i=0;i<pos;i++)    {
+           if(pos>0)  {
+                listaS  += lista[i];
+            }
+       }
+       return listaS; 
     }
-
+    
+    private String formato()    {  
+        int guiones = pos* ANCHO_FORMATO;  
+        String cabecera = "";
+        cabecera += CAR_CABECERA;
+    }
+    
     /**
      * Mostrar en pantalla la lista
      */
