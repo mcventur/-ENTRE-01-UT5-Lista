@@ -12,14 +12,15 @@
 
 
 import java.util.Random;
-
+import java.util.Arrays;
 public class ListaNumeros {
     public static final int DIMENSION = 10;
     public static final int ANCHO_FORMATO = 6;
     public static final char CAR_CABECERA = '-';
 
     private static final Random generador = new Random();
-    //TODO
+    private int[] n;
+    private int pos;
     
     
 
@@ -31,7 +32,9 @@ public class ListaNumeros {
      * @param n el tamaño máximo de la lista
      */
     public ListaNumeros() {
-        //TODO
+        int pos = 0;
+        n = new int[10];
+        
         
     }
 
@@ -42,29 +45,38 @@ public class ListaNumeros {
      * @param numero el valor que se añade.  
      * @return true si se ha podido añadir, false en otro caso
      */
-    public void addElemento() {
-        //TODO
+    public boolean addElemento() {
+     if(pos<n.length){
+            pos--;
+            return true;
+        }
+        else{
+            return false;
+        }
         
-        
-
+     
     }
 
     /**
      * @return true si la lista está completa, false en otro caso
      * Hacer sin if
      */
-    public void estaCompleta() {
-        //TODO
-
+    public boolean estaCompleta() {
+        while(pos==n.length){
+            return true;
+        }
+        return false;
     }
 
     /**
      * @return true si la lista está vacía, false en otro caso.
      * Hacer sin if
      */
-    public void estaVacia() {
-       //TODO
-
+    public boolean estaVacia() {
+       while(pos==n.length){
+           return true;
+       }
+       return false;
     }
 
     /**
