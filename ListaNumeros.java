@@ -82,10 +82,6 @@ public class ListaNumeros {
      * Vacía la lista
      */
     public void vaciarLista() {
-        while(pos>=0)  {
-            lista[pos] = 0;
-            pos--;
-        } 
         pos = 0;
     }
 
@@ -105,11 +101,11 @@ public class ListaNumeros {
        return listaS; 
     }
     
-    private String formato()    {  
-        int guiones = pos* ANCHO_FORMATO;  
-        String cabecera = "";
-        cabecera += CAR_CABECERA;
-    }
+    //private String formato()    {  
+        //int guiones = pos* ANCHO_FORMATO;  
+        //String cabecera = "";
+        //cabecera += CAR_CABECERA;
+    //}
     
     /**
      * Mostrar en pantalla la lista
@@ -133,12 +129,20 @@ public class ListaNumeros {
      * No se puede usar ningún otro array auxiliar ni hay que ordenar previamente
      * la lista
      */
-    public void segundoMaximo() {       
-       //TODO
-
-        
+    public int segundoMaximo() {       
+        int maximo = Integer.MIN_VALUE;
+        int segundoMaximo = Integer.MIN_VALUE;
+           for(int i = 0;i<pos;i++) {
+            if(lista[i]>maximo) {
+               segundoMaximo = maximo;
+               maximo = lista[i];
+            }
+            else if (lista[i]>segundoMaximo && lista[i]!=maximo)    {
+                segundoMaximo = lista[i];
+            }
+        }
+        return segundoMaximo;
     }
-
     /**
      * El método coloca los valores que son segundos máximos al principio de
      * la lista respetando el orden de aparición del resto de elementos
@@ -156,11 +160,17 @@ public class ListaNumeros {
      * @return true si se han colocado los segundos máximos
      *          false si no se han colocado los segundos máximos porque no había ninguno
      */
-    public void segundosMaximosAlPrincipio() {
-        //TODO
-        
-        
-
+    public boolean segundosMaximosAlPrincipio() {
+        int segMaximo = this.segundoMaximo();
+        for(int i =0;i<pos;i++) {
+            if(lista[i]==segMaximo) {
+                for(int contador=i;contador<=1;i--)  {
+                    lista[contador] = lista[contador-1];
+                }
+                lista[0] = segMaximo;
+            }
+        }
+        return true;
     }
 
     /**
@@ -173,12 +183,12 @@ public class ListaNumeros {
      *  
      * Usa exclusivamente métodos de la clase Arrays
      */
-    public void buscarBinario() {
+    //public void buscarBinario() {
          //TODO
          
          
 
-    }
+    //}
 
     /**
      * 
@@ -188,12 +198,12 @@ public class ListaNumeros {
      * Estos valores van a representar el brillo de una zona del espacio
      * 
      */
-    public void crearBrillos() {
+    //public void crearBrillos() {
        //TODO
        
        
 
-    }
+    //}
 
     /**
      * @param  un array bidimensional brillos 
@@ -207,11 +217,11 @@ public class ListaNumeros {
      * 
      * Nota -  No hay estrellas en los bordes del array brillos
      */
-    public void detectarEstrellas() {
+    //public void detectarEstrellas() {
        //TODO
        
        
        
-    }
+    //}
 
 }
