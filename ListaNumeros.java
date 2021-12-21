@@ -49,10 +49,9 @@ public class ListaNumeros {
             pos++;
             return true;
         }
-        else {
+        else    {
             return false;
         }
-        
     }
 
     /**
@@ -95,18 +94,23 @@ public class ListaNumeros {
        String listaS = "";
        for(int i=0;i<pos;i++)    {
            if(pos>0)  {
-                listaS  += lista[i];
+                listaS  += Utilidades.centrarNumero(lista[i], ANCHO_FORMATO);
             }
        }
+       listaS = formato(listaS);
        return listaS; 
     }
     
-    //private String formato()    {  
-        //int guiones = pos* ANCHO_FORMATO;  
-        //String cabecera = "";
-        //cabecera += CAR_CABECERA;
-    //}
-    
+    private String formato(String listaS)    {  
+        int guiones = pos* ANCHO_FORMATO;  
+        String cabecera = "";
+        for(int i = 0;i<guiones;i++)    {
+            cabecera += CAR_CABECERA;
+        }
+        return cabecera+ "\n" + listaS + "\n" + cabecera;
+    }
+        
+
     /**
      * Mostrar en pantalla la lista
      */
@@ -132,7 +136,7 @@ public class ListaNumeros {
     public int segundoMaximo() {       
         int maximo = Integer.MIN_VALUE;
         int segundoMaximo = Integer.MIN_VALUE;
-           for(int i = 0;i<pos;i++) {
+        for(int i = 0;i<pos;i++) {
             if(lista[i]>maximo) {
                segundoMaximo = maximo;
                maximo = lista[i];
@@ -162,15 +166,17 @@ public class ListaNumeros {
      */
     public boolean segundosMaximosAlPrincipio() {
         int segMaximo = this.segundoMaximo();
+        boolean hecho = false;
         for(int i =0;i<pos;i++) {
             if(lista[i]==segMaximo) {
                 for(int contador=i;contador<=1;i--)  {
                     lista[contador] = lista[contador-1];
                 }
                 lista[0] = segMaximo;
+                hecho = true;
             }
         }
-        return true;
+        return hecho;
     }
 
     /**
@@ -198,12 +204,15 @@ public class ListaNumeros {
      * Estos valores van a representar el brillo de una zona del espacio
      * 
      */
-    //public void crearBrillos() {
-       //TODO
-       
-       
-
-    //}
+    public static int[][] crearBrillos() {
+       int[][] brillos = new int[DIMENSION][DIMENSION];
+       for(int i = 0; i<brillos.length;i++) {
+           for(int contador = 0;contador<brillos[0].length;contador++) {
+               brillos[i][contador] = generador.nextInt(11); 
+            }     
+        }
+       return brillos; 
+    }
 
     /**
      * @param  un array bidimensional brillos 
@@ -217,11 +226,18 @@ public class ListaNumeros {
      * 
      * Nota -  No hay estrellas en los bordes del array brillos
      */
-    //public void detectarEstrellas() {
-       //TODO
-       
-       
-       
-    //}
+    public static boolean[][] detectarEstrellas() {
+        int[][] brillos = crearBrillos();
+        boolean[][] estrellas = new boolean[DIMENSION][DIMENSION];
+        for(int i = 1; i<brillos.length-1;i++) {
+           for(int contador = 1;contador<brillos[0].length-1;contador++) {
+               int sumaBrillos = brillos[i-1][contador] + brillos[i][contador-1] + brillos[i][contador+1] + brillos[i+1][contador];
+               if(sumaBrillos<30)   {
+                   estrellas[i][contador] = true; 
+                }
+            }     
+        }   
+        return estrellas;   
+    }
 
 }
