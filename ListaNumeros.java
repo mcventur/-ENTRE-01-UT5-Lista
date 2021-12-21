@@ -10,7 +10,6 @@
  * @author Jonathan Del Arco
  */
 
-
 import java.util.Random;
 import java.util.Arrays;
 
@@ -20,7 +19,7 @@ public class ListaNumeros {
     public static final char CAR_CABECERA = '-';
 
     private static final Random generador = new Random();
-    private int[] listaNumeros;
+    private static int[] listaNumeros;
     private int pos;
     
     /**
@@ -100,19 +99,18 @@ public class ListaNumeros {
            Utilidades str=null;
            String numero = "";
            String resultado = "";
+           String cSup="";
            
            for(int i=0; i<pos; i++){
-               System.out.printf("%c" + "%c" + "%c" + "%c" + "%c" + "%c", CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA);
+               cSup+= String.format("%c" + "%c" + "%c" + "%c" + "%c" + "%c", CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA);
            }
-           System.out.print("\n");
+           
            for(int i=0; i<pos; i++){
                numero = str.centrarNumero(listaNumeros[i], ANCHO_FORMATO);
-               System.out.print(numero);
+               resultado += numero;
            }
-           System.out.print("\n");
-           for(int i=0; i<pos; i++){
-               System.out.printf("%c" + "%c" + "%c" + "%c" + "%c" + "%c", CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA,CAR_CABECERA);
-           }
+           
+           return cSup + "\n" + resultado + "\n" + cSup;
        }
        
        return "";
@@ -148,13 +146,13 @@ public class ListaNumeros {
             if(listaNumeros[i] >= max) {
                 segMax = max;
                 max=listaNumeros[i];
-            }else if(listaNumeros[i] < segMax){
+            }else if(listaNumeros[i] > segMax && listaNumeros[i] < max){
                 segMax=listaNumeros[i];
-            } else if(pos==1 || max==segMax) {
+            } else if(pos==1){
                 seRepite = Integer.MIN_VALUE;
             }
         }
-         return segMax;
+        return segMax;
     }
 
     /**
@@ -174,12 +172,25 @@ public class ListaNumeros {
      * @return true si se han colocado los segundos máximos
      *          false si no se han colocado los segundos máximos porque no había ninguno
      */
-    public void segundosMaximosAlPrincipio() {
+    public boolean segundosMaximosAlPrincipio() {
+        int contador=0;
+        int aux=0;
+        int segMax=segundoMaximo();
         
-        
-        
-
+        //Cuenta las veces que se repite
+        for(int i=0; i<pos; i++){
+            if(listaNumeros[i]==segMax){
+                contador++;
+            }
+        }
+        //Añade el numero tantas veces repetido al principio del Array 
+        for(int j=0; j<contador; j++){
+                listaNumeros[j]=segMax;
+        }
+                
+        return true;
     }
+   
 
     /**
      * @param numero búsqueda binaria de  numero en lista
@@ -191,11 +202,20 @@ public class ListaNumeros {
      *  
      * Usa exclusivamente métodos de la clase Arrays
      */
-    public void buscarBinario() {
-         
-         
-         
-
+    public int buscarBinario(int numero) {
+        //Crea la copia
+        int[] copiaListaNumeros = Arrays.copyOf(listaNumeros, listaNumeros.length);
+        //Ordena la copia
+        Arrays.sort(copiaListaNumeros);
+        //Asigno a una variable el valor del índice
+        int index = Arrays.binarySearch(copiaListaNumeros, numero);
+        //Si el numero existe en el Array devuelve el índice en donde está
+        for(int i=0; i<pos; i++){
+            if(numero==copiaListaNumeros[i]){
+                return index;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -206,11 +226,17 @@ public class ListaNumeros {
      * Estos valores van a representar el brillo de una zona del espacio
      * 
      */
-    public void crearBrillos() {
-       //TODO
+    public static int[][] crearBrillos() {
+       int[][] brillos = new int[DIMENSION][DIMENSION];
        
+       //Añade numeros aleatorios al Array
+       for(int fila=0; fila<DIMENSION; fila++){
+           for(int columna=0; columna<DIMENSION; columna++){
+               brillos[fila][columna]= generador.nextInt(11);
+           }
+       }
        
-
+       return brillos;
     }
 
     /**
@@ -225,11 +251,19 @@ public class ListaNumeros {
      * 
      * Nota -  No hay estrellas en los bordes del array brillos
      */
-    public void detectarEstrellas() {
-       //TODO
+    public static boolean[][] detectarEstrellas(int[][] brillos) {
+        boolean[][] tablaBoolean=new boolean[DIMENSION][DIMENSION];
+        
+        for(int fila=1; fila<DIMENSION-1; fila++){
+           for(int columna=1; columna<DIMENSION-1; columna++){
+               if(brillos[fila][columna-1] + brillos[fila-1][columna] + brillos[fila][columna+1] + brillos[fila+1][columna]>30){
+                   tablaBoolean[fila][columna]=true;
+               } else {
+                   tablaBoolean[fila][columna]=false;
+               }
+           }
+        }
        
-       
-       
+        return tablaBoolean;
     }
-
 }
