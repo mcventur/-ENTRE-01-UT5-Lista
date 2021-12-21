@@ -21,7 +21,7 @@ public class ListaNumeros {
     private static final Random generador = new Random();
     private int[] n;
     private int pos;
-    
+    private int[] lista;
     
 
     /**
@@ -46,8 +46,8 @@ public class ListaNumeros {
      * @return true si se ha podido añadir, false en otro caso
      */
     public boolean addElemento() {
-     if(pos<n.length){
-            pos--;
+     if(pos>n.length){
+            pos++; 
             return true;
         }
         else{
@@ -62,10 +62,7 @@ public class ListaNumeros {
      * Hacer sin if
      */
     public boolean estaCompleta() {
-        while(pos==n.length){
-            return true;
-        }
-        return false;
+        return pos == n.length;
     }
 
     /**
@@ -73,25 +70,26 @@ public class ListaNumeros {
      * Hacer sin if
      */
     public boolean estaVacia() {
-       while(pos==n.length){
-           return true;
-       }
-       return false;
+       return pos != n.length;
     }
 
     /**
      * @return el nº de elementos realmente guardados en la lista
      */
-    public void getTotalNumeros() {
-        //TODO
-
+    public int getTotalNumeros() {
+        return pos;
+        
     }
 
     /**
      * Vacía la lista
      */
     public void vaciarLista() {
-       //TODO
+        for(int i=0;lista.length>i;i++)
+       {
+            lista[i]=0;
+       }
+       System.out.println(lista);
     }
 
     /**
@@ -101,14 +99,19 @@ public class ListaNumeros {
      * Si la lista está vacía devuelve ""
      */
     public String toString() {
-       //TODO
-       
-       
-       
+       String str = "";
+       int guion = pos* ANCHO_FORMATO;
+       for(int i=0; i<pos;i++){
+           if(pos>0){
+               lista  += Utilidades.centrarNumero(lista[i], ANCHO_FORMATO);
+           }
+        }
+       for(int i=0; i<guion;i++){
+           cabecera += CAR_CABECERA;
+       }
        return "";
     }
-
-     
+    
 
     /**
      * Mostrar en pantalla la lista
@@ -133,8 +136,7 @@ public class ListaNumeros {
      * la lista
      */
     public void segundoMaximo() {       
-       //TODO
-
+      
         
     }
 
@@ -173,10 +175,7 @@ public class ListaNumeros {
      * Usa exclusivamente métodos de la clase Arrays
      */
     public void buscarBinario() {
-         //TODO
-         
-         
-
+        
     }
 
     /**
@@ -188,7 +187,12 @@ public class ListaNumeros {
      * 
      */
     public void crearBrillos() {
-       //TODO
+        int tabla[][] = new int [DIMENSION][DIMENSION]; 
+        for (int fila = 0; fila < tabla.length; fila++) {
+                for (int columna = 0; columna < tabla[fila].length; columna++) {
+                    tabla[fila][columna] = (int) (Math.random() * 30 + 1);
+                }
+            }
        
        
 
