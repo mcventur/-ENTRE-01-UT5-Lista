@@ -7,22 +7,21 @@
  * y dos  métodos estáticos para trabajar con
  * arrays de dos dimensiones
  *
- * @author -
+ * @author - Adrián Las
  */
 
 
 import java.util.Random;
+import java.util.Arrays;
 
-public class ListaNumeros {
-    public static final int DIMENSION = 10;
+public class ListaNumeros{
     public static final int ANCHO_FORMATO = 6;
     public static final char CAR_CABECERA = '-';
-
+    public static final int DIMENSION = 10;
     private static final Random generador = new Random();
-    //TODO
+    private int[] lista;
+    private int pos;
     
-    
-
     /**
      * Constructor de la clase ListaNumeros
      * Crea e inicializa adecuadamente los
@@ -30,9 +29,9 @@ public class ListaNumeros {
      *
      * @param n el tamaño máximo de la lista
      */
-    public ListaNumeros() {
-        //TODO
-        
+    public ListaNumeros(int n){
+        lista = new int[n];
+        pos = 0;
     }
 
     /**
@@ -42,44 +41,44 @@ public class ListaNumeros {
      * @param numero el valor que se añade.  
      * @return true si se ha podido añadir, false en otro caso
      */
-    public void addElemento() {
-        //TODO
-        
-        
-
+    public boolean addElemento(int numero){
+        if(pos<lista.length){
+            lista[pos] = numero;
+            pos++;
+            return true;
+        }
+        return false;
     }
 
     /**
      * @return true si la lista está completa, false en otro caso
      * Hacer sin if
      */
-    public void estaCompleta() {
-        //TODO
-
+    public boolean estaCompleta(){
+        return pos>=lista.length;
     }
 
     /**
      * @return true si la lista está vacía, false en otro caso.
      * Hacer sin if
      */
-    public void estaVacia() {
-       //TODO
-
+    public boolean estaVacia(){
+        return pos == 0;
     }
 
     /**
      * @return el nº de elementos realmente guardados en la lista
      */
-    public void getTotalNumeros() {
-        //TODO
-
+    public int getTotalNumeros(){
+        return pos;
     }
 
     /**
      * Vacía la lista
      */
-    public void vaciarLista() {
-       //TODO
+    public void vaciarLista(){
+        lista = new int[lista.length];
+        pos = 0;
     }
 
     /**
@@ -88,15 +87,30 @@ public class ListaNumeros {
      * 
      * Si la lista está vacía devuelve ""
      */
-    public String toString() {
-       //TODO
-       
-       
+    public String toString(){
+       if(!estaVacia()){
+           String centro = "";
+           String marco = "";
+           for(int n=0; n < pos; n++){
+               centro += Utilidades.centrarNumero(lista[n], ANCHO_FORMATO);
+               marco += segmentoMarco();
+           }
+           return marco + "\n" + centro + "\n" + marco;
+       }
        
        return "";
     }
-
-     
+    
+    /**
+     * Devuelve tantos CAR_CABECERA como determine ANCHO_FORMATO
+     */
+    private String segmentoMarco(){
+        String salida = "";
+        for(int i=0; i < ANCHO_FORMATO; i++){
+            salida += CAR_CABECERA;
+        }
+        return salida;
+    }
 
     /**
      * Mostrar en pantalla la lista
@@ -120,10 +134,19 @@ public class ListaNumeros {
      * No se puede usar ningún otro array auxiliar ni hay que ordenar previamente
      * la lista
      */
-    public void segundoMaximo() {       
-       //TODO
-
-        
+    public int segundoMaximo(){       
+        int max = lista[0];
+        int smax = Integer.MIN_VALUE;
+        for(int i=0; i < pos; i++){
+            if(lista[i] > max){
+                smax = max;
+                max = lista[i];
+            }
+            else if(lista[i] < max){
+                smax = lista[i];
+            }
+        }
+        return smax;
     }
 
     /**
@@ -143,11 +166,19 @@ public class ListaNumeros {
      * @return true si se han colocado los segundos máximos
      *          false si no se han colocado los segundos máximos porque no había ninguno
      */
-    public void segundosMaximosAlPrincipio() {
-        //TODO
-        
-        
-
+    public boolean segundosMaximosAlPrincipio(){
+        int segundoMaximo = segundoMaximo();
+        int pos2 = 0;
+        for(int i=0; i < pos; i++){
+            if(lista[i] == segundoMaximo){
+                for(int n=i; n > pos2; n--){
+                    lista[n] = lista[n-1];
+                }
+                lista[pos2] = segundoMaximo;
+                pos2++;
+            }
+        }
+        return lista[0] == segundoMaximo;
     }
 
     /**
@@ -160,11 +191,15 @@ public class ListaNumeros {
      *  
      * Usa exclusivamente métodos de la clase Arrays
      */
-    public void buscarBinario() {
-         //TODO
-         
-         
-
+    public int buscarBinario(int numero){
+        int[] copia = Arrays.copyOf(lista, lista.length);
+        Arrays.sort(copia);
+        int num = Arrays.binarySearch(copia, numero);
+        if(num >= 0){
+            return num;
+        }
+        
+        return -1;
     }
 
     /**
@@ -175,11 +210,14 @@ public class ListaNumeros {
      * Estos valores van a representar el brillo de una zona del espacio
      * 
      */
-    public void crearBrillos() {
-       //TODO
-       
-       
-
+    public static int[][] crearBrillos(){
+        int[][] brillos = new int[DIMENSION][DIMENSION];
+        for(int f=0; f < DIMENSION; f++){
+            for(int c=0; c < DIMENSION; c++){
+                brillos[f][c] = generador.nextInt(11);
+            }
+        }
+        return brillos;
     }
 
     /**
@@ -194,11 +232,13 @@ public class ListaNumeros {
      * 
      * Nota -  No hay estrellas en los bordes del array brillos
      */
-    public void detectarEstrellas() {
-       //TODO
-       
-       
-       
+    public static boolean[][] detectarEstrellas(int[][] brillos){
+        boolean[][] estrellas = new boolean[DIMENSION][DIMENSION];
+        for(int f=1; f < DIMENSION-1; f++){
+            for(int c=1; c < DIMENSION-1; c++){
+                estrellas[f][c] = brillos[f-1][c] + brillos[f][c-1] + brillos[f][c+1] + brillos[f+1][c] > 30;
+            }
+        }
+        return estrellas;
     }
-
 }
