@@ -12,7 +12,7 @@
 
 
 import java.util.Random;
-
+import java.util.Arrays;
 public class ListaNumeros {
     public static final int DIMENSION = 10;
     public static final int ANCHO_FORMATO = 6;
@@ -101,7 +101,7 @@ public class ListaNumeros {
        return listaS; 
     }
     
-    private String formato(String listaS)    {  
+    private String formato(String listaS)  {  
         int guiones = pos* ANCHO_FORMATO;  
         String cabecera = "";
         for(int i = 0;i<guiones;i++)    {
@@ -189,12 +189,18 @@ public class ListaNumeros {
      *  
      * Usa exclusivamente métodos de la clase Arrays
      */
-    //public void buscarBinario() {
-         //TODO
-         
-         
-
-    //}
+    public int buscarBinario(int numero) {
+    int [] copiaLista = Arrays.copyOf(lista, lista.length);        
+    Arrays.sort (copiaLista);
+    int indice = Arrays.binarySearch(copiaLista, numero);
+    
+    for(int i = 0;i<pos;i++)   {
+        if(numero==copiaLista[i])   {
+            return indice;
+        }
+    }     
+    return -1;
+    }
 
     /**
      * 
@@ -226,13 +232,12 @@ public class ListaNumeros {
      * 
      * Nota -  No hay estrellas en los bordes del array brillos
      */
-    public static boolean[][] detectarEstrellas() {
-        int[][] brillos = crearBrillos();
+    public static boolean[][] detectarEstrellas(int[][] brillos) {
         boolean[][] estrellas = new boolean[DIMENSION][DIMENSION];
         for(int i = 1; i<brillos.length-1;i++) {
            for(int contador = 1;contador<brillos[0].length-1;contador++) {
                int sumaBrillos = brillos[i-1][contador] + brillos[i][contador-1] + brillos[i][contador+1] + brillos[i+1][contador];
-               if(sumaBrillos<30)   {
+               if(sumaBrillos>30)   {
                    estrellas[i][contador] = true; 
                 }
             }     
