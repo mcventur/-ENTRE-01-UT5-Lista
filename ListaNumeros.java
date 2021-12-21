@@ -7,20 +7,21 @@
  * y dos  métodos estáticos para trabajar con
  * arrays de dos dimensiones
  *
- * @author -
+ * @author - Antonio Aguilera
  */
 
 
 import java.util.Random;
-
+import java.util.Arrays;
 public class ListaNumeros {
     public static final int DIMENSION = 10;
     public static final int ANCHO_FORMATO = 6;
     public static final char CAR_CABECERA = '-';
 
     private static final Random generador = new Random();
-    //TODO
-    
+    private int[] n;
+    private int pos;
+    private int[] lista;
     
 
     /**
@@ -31,7 +32,9 @@ public class ListaNumeros {
      * @param n el tamaño máximo de la lista
      */
     public ListaNumeros() {
-        //TODO
+        int pos = 0;
+        n = new int[10];
+        
         
     }
 
@@ -42,44 +45,51 @@ public class ListaNumeros {
      * @param numero el valor que se añade.  
      * @return true si se ha podido añadir, false en otro caso
      */
-    public void addElemento() {
-        //TODO
+    public boolean addElemento() {
+     if(pos>n.length){
+            pos++; 
+            return true;
+        }
+        else{
+            return false;
+        }
         
-        
-
+     
     }
 
     /**
      * @return true si la lista está completa, false en otro caso
      * Hacer sin if
      */
-    public void estaCompleta() {
-        //TODO
-
+    public boolean estaCompleta() {
+        return pos == n.length;
     }
 
     /**
      * @return true si la lista está vacía, false en otro caso.
      * Hacer sin if
      */
-    public void estaVacia() {
-       //TODO
-
+    public boolean estaVacia() {
+       return pos != n.length;
     }
 
     /**
      * @return el nº de elementos realmente guardados en la lista
      */
-    public void getTotalNumeros() {
-        //TODO
-
+    public int getTotalNumeros() {
+        return pos;
+        
     }
 
     /**
      * Vacía la lista
      */
     public void vaciarLista() {
-       //TODO
+        for(int i=0;lista.length>i;i++)
+       {
+            lista[i]=0;
+       }
+       System.out.println(lista);
     }
 
     /**
@@ -89,14 +99,19 @@ public class ListaNumeros {
      * Si la lista está vacía devuelve ""
      */
     public String toString() {
-       //TODO
-       
-       
-       
+       String str = "";
+       int guion = pos* ANCHO_FORMATO;
+       for(int i=0; i<pos;i++){
+           if(pos>0){
+               lista  += Utilidades.centrarNumero(lista[i], ANCHO_FORMATO);
+           }
+        }
+       for(int i=0; i<guion;i++){
+           cabecera += CAR_CABECERA;
+       }
        return "";
     }
-
-     
+    
 
     /**
      * Mostrar en pantalla la lista
@@ -121,8 +136,7 @@ public class ListaNumeros {
      * la lista
      */
     public void segundoMaximo() {       
-       //TODO
-
+      
         
     }
 
@@ -161,10 +175,7 @@ public class ListaNumeros {
      * Usa exclusivamente métodos de la clase Arrays
      */
     public void buscarBinario() {
-         //TODO
-         
-         
-
+        
     }
 
     /**
@@ -176,7 +187,12 @@ public class ListaNumeros {
      * 
      */
     public void crearBrillos() {
-       //TODO
+        int tabla[][] = new int [DIMENSION][DIMENSION]; 
+        for (int fila = 0; fila < tabla.length; fila++) {
+                for (int columna = 0; columna < tabla[fila].length; columna++) {
+                    tabla[fila][columna] = (int) (Math.random() * 30 + 1);
+                }
+            }
        
        
 
