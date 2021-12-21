@@ -7,7 +7,7 @@
  * y dos  métodos estáticos para trabajar con
  * arrays de dos dimensiones
  *
- * @author Jonathan Del Arco
+ * @author - Jonathan Del Arco
  */
 
 import java.util.Random;
